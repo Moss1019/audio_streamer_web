@@ -3,7 +3,7 @@
 function ContentSearch() {
     return (
         <>
-        Search
+            Search section coming soon...
         </>
     );
 }

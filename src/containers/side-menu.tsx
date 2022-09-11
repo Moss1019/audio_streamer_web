@@ -6,6 +6,9 @@ import LibIcon from "@mui/icons-material/LibraryMusic"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import DarkModeIcon from "@mui/icons-material/DarkMode"
 import LightModeIcon from "@mui/icons-material/LightMode"
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { changeTheme } from "../store/theme";
 
 const MenuBox = styled(Box)(() => ({
     width: '25vw',
@@ -24,6 +27,12 @@ const LibraryBox = styled(Box)(() => ({
 }));
 
 function SideMenu() {
+    const navigate = useNavigate();
+
+    const dispatch = useAppDispatch();
+
+    const isLight = useAppSelector((state) => state.theme.value);
+
     return (
         <MenuBox>
             <Box>
@@ -32,36 +41,36 @@ function SideMenu() {
                 </IconBox>
 
                 <LibraryBox>
-                    <Grid container>
+                    {/* <Grid container>
                         <Grid item sm={12} md={6}>
-                            <MenuEntry text="home" icon={HomeIcon} onClick={() => console.log('Show Home')} />
+                            <MenuEntry text="home" icon={HomeIcon} onClick={() => navigate('/')} />
                         </Grid>
-                    </Grid>
+                    </Grid> */}
 
-                    <Grid container>
+                    {/* <Grid container>
                         <Grid item sm={12} md={6}>
-                            <MenuEntry text="search" icon={SearchIcon} onClick={() => console.log('Searching')} />
+                            <MenuEntry text="search" icon={SearchIcon} onClick={() => navigate('search')} />
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                     
                     <Grid container>
                         <Grid item sm={12} md={6}>
-                            <MenuEntry text="library" icon={LibIcon} onClick={() => console.log('Show Library')} />
+                            <MenuEntry text="library" icon={LibIcon} onClick={() => navigate('artist')} />
                         </Grid>
                     </Grid>
                 </LibraryBox>
 
                 <Grid container>
                     <Grid item sm={12} md={6}>
-                        <MenuEntry text="favorites" icon={FavoriteIcon} onClick={() => console.log('Show Favorites')} />
+                        <MenuEntry text="theme" icon={isLight ? LightModeIcon : DarkModeIcon} onClick={() => dispatch(changeTheme())} />
                     </Grid>
                 </Grid>
-            </Box>
 
-            <Box>
-                <IconButton onClick={() => console.log('changing theme')}>
-                    <DarkModeIcon />
-                </IconButton>
+                {/* <Grid container>
+                    <Grid item sm={12} md={6}>
+                        <MenuEntry text="favorites" icon={FavoriteIcon} onClick={() => console.log('Show Favorites')} />
+                    </Grid>
+                </Grid> */}
             </Box>
         </MenuBox>
     );
